@@ -23,7 +23,7 @@ class StoreEventRequest extends FormRequest
     {
         return [
             'Nom' => 'required|min:3|max:50',
-            'Description' => 'min:10|max:255',
+            'Description' => '',
             'TypeId' => 'exists:Type,Id'
         ];
     }

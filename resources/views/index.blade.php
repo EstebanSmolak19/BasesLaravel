@@ -21,22 +21,27 @@
                     <td>{{ $event->Type->Nom }}</td>
                     <td>
                         <a href="{{ route('app.show', $event->Id) }}" class="btn btn-sm btn-warning me-2">Voir</a>
-                        <form action="{{ route('app.destroy', $event->Id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger"
-                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')">
-                                Supprimer
-                            </button>
-                        </form>
+                        @can('delete', $event)
+                            <form action="{{ route('app.destroy', $event->Id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')">
+                                    Supprimer
+                                </button>
+                            </form>
+                        @endcan
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-        <a href={{ route('app.create') }} class="btn btn-primary">
-            Créer un Evenement
-        </a>
+
+        @can('create', $event)
+            <a href={{ route('app.create') }} class="btn btn-primary">
+                Créer un Evenement
+            </a>
+        @endcan
     </div>
 </div>
 @endsection

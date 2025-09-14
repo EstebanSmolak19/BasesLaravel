@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use App\Models\Type;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $events = Event::all();
@@ -21,11 +20,10 @@ class EventController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
+        $this->authorize('create', Event::class);
+
         $types = Type::all();
 
         return view('create', [
@@ -33,34 +31,33 @@ class EventController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreEventRequest $request)
     {
+        $this->authorize('create', Event::class);
+
         $validated = $request->validated();
         Event::create($validated);
-        return redirect()->route('app.index');
+
+        return redirect()->route('app.index')->with('success', 'Événement créé avec succès');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $event = Event::with('Type')->findOrFail($id);
+
+        $this->authorize('view', $event);
 
         return view('show', [
             'event' => $event
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $event = Event::with('Type')->findOrFail($id);
+
+        $this->authorize('update', $event);
+
         $types = Type::all();
 
         return view('edit', [
@@ -69,24 +66,24 @@ class EventController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateEventRequest $request, string $id)
     {
-        $validated = $request->validated(); //Vérifie les entrées utilisateurs.
         $event = Event::with('Type')->findOrFail($id);
+
+        $this->authorize('update', $event);
+
+        $validated = $request->validated();
         $event->update($validated);
 
-        return redirect()->route('app.index')->with('success', 'Événement mis à jour avec succès');;
+        return redirect()->route('app.index')->with('success', 'Événement mis à jour avec succès');
     }
- 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
-        $event = Event::findOrFail($id); //Si pas trouvé, renvoie une exception.
+        $event = Event::findOrFail($id);
+
+        $this->authorize('delete', $event);
+
         $event->delete();
 
         return redirect()->route('app.index')->with('success', 'Événement supprimé avec succès');
