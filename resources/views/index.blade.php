@@ -37,11 +37,14 @@
             </tbody>
         </table>
 
+        <div>
         @can('create', $event)
             <a href={{ route('app.create') }} class="btn btn-primary">
                 Créer un Evenement
             </a>
         @endcan
+            <a href="{{ route('logout') }}" class="btn btn-danger">Se déconnecter</a>
+        </div>
     </div>
 </div>
 @endsection

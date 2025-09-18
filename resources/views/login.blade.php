@@ -18,7 +18,7 @@
 
                     <!-- Formulaire -->
                     <div class="card-body p-4 p-md-5">
-                        <form action="{{ route('login.login') }}" method="POST">
+                        <form action="{{ route('login.submit') }}" method="POST">
                             @csrf
 
                             <x-input type="email" 
