@@ -65,7 +65,6 @@
                         <!-- Séparateur -->
                         <hr class="my-5 border-2">
 
-                        <!-- Actions -->
                         <div class="text-center">
                             <h5 class="mb-4 text-muted">
                                 <i class="bi bi-gear me-2"></i>Actions disponibles
@@ -76,10 +75,12 @@
                                     <i class="bi bi-arrow-left me-2"></i>Retour à la liste
                                 </a>
                                 
+                                @can('update', $event)
                                 <!-- Modifier -->
                                 <a href="{{ route('app.edit', $event->Id) }}" class="btn btn-warning btn-lg px-4">
                                     <i class="bi bi-pencil-square me-2"></i>Modifier l'événement
                                 </a>
+                                @endcan
                             </div>
                         </div>
                     </div>

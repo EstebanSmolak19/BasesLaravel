@@ -7,7 +7,6 @@
             <div class="col-md-6 col-lg-5 col-xl-4">
                 <div class="card shadow-lg border-0 rounded-4">
 
-                    <!-- Header -->
                     <div class="card-header bg-primary text-white text-center py-4 rounded-top-4">
                         <div class="mb-3">
                             <i class="bi bi-person-lock display-4"></i>
@@ -16,7 +15,6 @@
                         <p class="mb-0 opacity-75">Accédez à votre espace</p>
                     </div>
 
-                    <!-- Formulaire -->
                     <div class="card-body p-4 p-md-5">
                         <form action="{{ route('login.submit') }}" method="POST">
                             @csrf

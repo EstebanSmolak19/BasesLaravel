@@ -13,9 +13,4 @@
                placeholder="{{ $placeholder }}" 
                value="{{ old($name) }}">
     </div>
-    @error($name)
-        <div class="invalid-feedback">
-            <i class="bi bi-exclamation-triangle me-1"></i>{{ $message }}
-        </div>
-    @enderror
 </div>

@@ -7,7 +7,6 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use App\Models\Type;
-use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
